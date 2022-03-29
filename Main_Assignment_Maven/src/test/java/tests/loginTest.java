@@ -9,21 +9,22 @@ import org.testng.annotations.Test;
 
 
 public class loginTest extends loginPages{
+
     @Test(priority = 8)
-    public static void Withdrawn(){
+    public static void Withdrawn() throws InterruptedException {
         driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[3]/button[3]")).click();
         String leftAmount = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]")).getText();
         System.out.println(leftAmount);
         String amountTobewithdrawn = "1000";
-        driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[3]/button[3]")).click();
+        Thread.sleep(3000);
         driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[4]/div/form/div/input")).sendKeys(amountTobewithdrawn);
         driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[4]/div/form/button")).click();
         String finalAmount = driver.findElement(By.xpath("/html/body/div/div/div[2]/div/div[2]/strong[2]")).getText();
         System.out.println(finalAmount);
-        if(Integer.parseInt(finalAmount) - Integer.parseInt(amountTobewithdrawn) == Integer.parseInt(leftAmount)){
-            System.out.println("Verified");
+        if(Integer.parseInt(amountTobewithdrawn) - Integer.parseInt(leftAmount) == Integer.parseInt(finalAmount)){
+            System.out.println("Withdraw Verified");
         }
-        else System.out.println("Not Verified");
+        else System.out.println("Withdraw Not Verified");
     }
 
     @Test(priority = 7)
